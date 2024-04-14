@@ -1,9 +1,9 @@
-
+import Products from "../components/products/Products"
 function Home() {
   return (
-    <div>
-      <h1>hello world this is home page</h1>
-    </div>
+    <>
+      <Products />
+    </>
   )
 }
 

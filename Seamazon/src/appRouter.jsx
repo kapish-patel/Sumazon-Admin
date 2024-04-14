@@ -2,7 +2,7 @@
 import {createBrowserRouter} from 'react-router-dom';
 import Layout from './Layout';
 import Home from './pages/Home';
-import User from './pages/User';
+import UserPage from './pages/User';
 import NotFound from './pages/NotFound';
 
 
@@ -18,7 +18,7 @@ const AppRouter = createBrowserRouter([
       },
       {
         path: '/user',
-        element: <User/>
+        element: <UserPage/>
       },
       {
         path: '*',

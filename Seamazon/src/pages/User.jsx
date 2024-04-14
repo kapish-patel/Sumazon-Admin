@@ -1,10 +1,11 @@
+import User from "../components/user/User";
 
-function User() {
+function UserPage() {
   return (
-    <div className="user-container">
-        <h1>this is a user part</h1>
-    </div>
+    <>
+      <User />
+    </>
   )
 }
 
-export default User
+export default UserPage
