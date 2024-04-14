@@ -1,7 +1,11 @@
+
+import { RouterProvider } from 'react-router-dom';
+import AppRouter from './appRouter';
+
 function App() {
   return (
-    <div>
-      <h1>Seamazon</h1>
+    <div className="App-container">
+      <RouterProvider router={AppRouter} />
     </div>
   )
 }
