@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router-dom'
 import './Content.css'
+import Header from './Header'
+
 function Content() {
   return (
     <div className="content-container">
-        <h1>this is a content part</h1>
+        <Header />
         <Outlet />
     </div>
   )

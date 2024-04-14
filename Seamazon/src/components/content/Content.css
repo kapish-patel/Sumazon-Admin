@@ -5,4 +5,27 @@
     height: 100%;
     background-color: white;
     box-sizing: border-box;
+    padding: 20px;
+}
+
+.header-container{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 10px 20px;
+}
+
+.icon-container{
+    font-size: 25px;
+    color: #000000;
+    height: 35px;
+    width: 35px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.icon-container:hover{
+    background-color: #d3d3d3;
 }
