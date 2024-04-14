@@ -1,10 +1,21 @@
 import '../common/common.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import './Products.css';
+
 
 function Products() {
   return (
     <div className="main-content-container">
-        <h1>Products and add new product button</h1>
-        <h1>table with pagination</h1>
+      <div className="product-container">
+        <div className="product-header">
+          <p>products</p>
+          <button> <FontAwesomeIcon icon={faPlus} /> product</button>
+        </div>
+        <div className="product-table">
+          <h1>table here</h1>
+        </div>
+      </div>
     </div>
   )
 }

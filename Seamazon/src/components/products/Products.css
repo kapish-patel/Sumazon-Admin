@@ -1,0 +1,35 @@
+.product-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    height: 100%;
+    width: 90%;
+}
+
+.product-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;   
+    margin: 20px;
+}
+
+.product-header p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.product-header button {
+    background-color: black;
+    margin-right: 10px;
+    color: white;
+    padding: 0 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: large;
+    text-transform: capitalize;
+}
