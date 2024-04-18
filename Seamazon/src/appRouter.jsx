@@ -1,31 +1,29 @@
-
-import {createBrowserRouter} from 'react-router-dom';
-import Layout from './Layout';
-import Home from './pages/Home';
-import UserPage from './pages/User';
-import NotFound from './pages/NotFound';
-
+import { createBrowserRouter } from "react-router-dom";
+import Layout from "./Layout";
+import Home from "./pages/Home";
+import UserPage from "./pages/User";
+import NotFound from "./pages/NotFound";
 
 // nested routes for the app
 const AppRouter = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
-    children:[
+    children: [
       {
-        path: '/',
-        element: <Home/>
+        path: "/",
+        element: <Home />,
       },
       {
-        path: '/user',
-        element: <UserPage/>
+        path: "/user",
+        element: <UserPage />,
       },
       {
-        path: '*',
-        element: <NotFound/>
-      }
-    ]
-  }
-])
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+]);
 
 export default AppRouter;
