@@ -66,6 +66,8 @@
 }
 
 .action-buttons > .icon-container {
+    height: 30px;
+    width: 30px;
     font-size: 17px;
 }
 
@@ -75,4 +77,22 @@
 
 .action-buttons > :last-child:hover {
     background-color: rgba(242, 97, 63, 0.5);   
+}
+
+.details-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.details-btn > .icon-container {
+    height: 30px;
+    width: 30px;
+    font-size: 17px;
+}
+
+.details-btn > :first-child:hover {
+    background-color: rgba(70, 245, 114, 0.5);   
 }

@@ -3,11 +3,8 @@ import { Rating } from "@mui/material";
 import { CheckCircleOutline } from "@mui/icons-material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import "./Products.css";
-
-function handleRowClick(params) {
-    console.log(params.row);
-}
 
 function handleEditClick(params) {
     console.log("Edit button clicked");
@@ -16,6 +13,11 @@ function handleEditClick(params) {
 
 function handleDeleteClick(params) {
     console.log("Delete button clicked");
+    console.log(params.row);
+}
+
+function handleDetailsClick(params) {
+    console.log("Details button clicked");
     console.log(params.row);
 }
 
@@ -62,6 +64,19 @@ const columns = [
         </div>
         <div className="icon-container" onClick={handleDeleteClick(params)}>
           <FontAwesomeIcon icon={faTrashCan} className="delete-btn"/>
+        </div>
+      </div>
+    ),
+  },
+  {
+    field: "details",
+    headerName: "Details",
+    autowidth: true,
+    sortable: false,
+    renderCell: (params) => (
+      <div className="details-btn">
+        <div className="icon-container" onClick={handleDetailsClick(params)}>
+          <FontAwesomeIcon icon={faEllipsisVertical} />
         </div>
       </div>
     ),
@@ -277,7 +292,6 @@ function Table() {
       <DataGrid
         rows={rows}
         columns={columns}
-        onRowClick={handleRowClick}
         sx={{
           borderRadius: 4,
           border: 1,
