@@ -54,16 +54,6 @@ function User() {
             // onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
-        <div className="info-section">
-          <p>Change Password</p>
-          <input
-            type="password"
-            className={isediting ? "info-input" : "info"}
-            placeholder="New Password"
-            value={"password"}
-            // onChange={(e) => setCurrentPassword(e.target.value)}
-          />
-        </div>
         {isediting ? <button className="save-data-btn" onClick={handleSaveData}>Save</button> : null}
       </div>
     </div>
