@@ -2,16 +2,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { Avatar } from "@mui/material";
 import { useState } from 'react';
+import { useSelector } from "react-redux";
 import "../common/common.css";
 import "./User.css";
-
-
 
 function handleSaveData() {
   console.log("Data Saved");
 }
 
 function User() {
+  const user = useSelector((state) => state.user);
+  
   const [isediting, setIsEditing] = useState(false);
 
   return (
@@ -32,7 +33,7 @@ function User() {
           <input
             type="text"
             className= {isediting ? "info-input" : "info"}
-            value={"Kapish"}
+            value={user.username}
             // onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -41,7 +42,7 @@ function User() {
           <input
             type="email"
             className= {isediting ? "info-input" : "info"}
-            value={"kapish@kapish.com"}
+            value={user.email}
             // onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -50,7 +51,7 @@ function User() {
           <input
             type="tel"
             className={isediting ? "info-input" : "info"}
-            value={"1234567890"}
+            value={user.phoneNumber}
             // onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
