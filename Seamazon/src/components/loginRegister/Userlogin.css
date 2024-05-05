@@ -1,0 +1,78 @@
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-form > p{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.form-group > input {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-group > button {
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+    background-color: black;
+    border: 1px solid;
+    color: white;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-group > button:hover {
+    background-color: white;
+    color: black;
+}
+
+.signupwith-google-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signupwith-google-container > button {
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+    background-color: white;
+    border: 1px solid;
+    margin: 1rem;
+    color: black;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.signupwith-google-container > button:hover {
+    background-color: black;
+    color: white;
+}
+
+
+
