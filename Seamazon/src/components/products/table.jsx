@@ -86,7 +86,6 @@ const columns = [
 
 function Table() {
   const rows = useSelector((state) => state.products);
-  console.log(rows);
   return (
     <div className="product-table">
       <DataGrid

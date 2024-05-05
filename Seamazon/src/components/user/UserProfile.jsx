@@ -1,19 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { Avatar } from "@mui/material";
-import { useState } from 'react';
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { editUser } from "../../Redux/slice/userSlice";
 import "../common/common.css";
 import "./User.css";
 
-function handleSaveData() {
-  console.log("Data Saved");
-}
+function UserProfile() {
+  const dispatch = useDispatch();
 
-function User() {
   const user = useSelector((state) => state.user);
-  
+
   const [isediting, setIsEditing] = useState(false);
+
+  const [userName, setUserName] = useState(user.userName);
+
+  const [email, setEmail] = useState(user.email);
+
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
 
   return (
     <div className="main-content-container">
@@ -32,18 +37,18 @@ function User() {
         <div className="info-section">
           <input
             type="text"
-            className= {isediting ? "info-input" : "info"}
-            value={user.username}
-            // onChange={(e) => setUsername(e.target.value)}
+            className={isediting ? "info-input" : "info"}
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
           />
         </div>
         <div className="info-section">
           <p>Email:</p>
           <input
             type="email"
-            className= {isediting ? "info-input" : "info"}
-            value={user.email}
-            // onChange={(e) => setEmail(e.target.value)}
+            className={isediting ? "info-input" : "info"}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="info-section">
@@ -51,14 +56,21 @@ function User() {
           <input
             type="tel"
             className={isediting ? "info-input" : "info"}
-            value={user.phoneNumber}
-            // onChange={(e) => setPhoneNumber(e.target.value)}
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
-        {isediting ? <button className="save-data-btn" onClick={handleSaveData}>Save</button> : null}
+        {isediting ? (
+          <button
+            className="save-data-btn"
+            onClick={dispatch(editUser({ userName, email, phoneNumber }))}
+          >
+            Save
+          </button>
+        ) : null}
       </div>
     </div>
   );
 }
 
-export default User;
+export default UserProfile;
