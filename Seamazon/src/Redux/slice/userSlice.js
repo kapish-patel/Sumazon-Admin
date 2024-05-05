@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     userName: "Kapish Patel",
     email: "kpatel3@seattleu.edu",
+    password: "password",
     phoneNumber: "123-456-7890",
 };
 
@@ -24,7 +25,7 @@ const userSlice = createSlice({
         },
         // Log out
         logOut: (state) => {
-            state.isLoggedIn = false;
+            state.isLoggedIn = false;   // start workinf grom here ** need to update the state.
         },
     },
 });
