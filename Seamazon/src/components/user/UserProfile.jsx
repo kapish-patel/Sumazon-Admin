@@ -8,6 +8,18 @@ import "../common/common.css";
 import "./User.css";
 
 function UserProfile() {
+  const handleSavebtnClick = () => {
+    setIsEditing(false);
+    dispatch(
+      editUser({
+        userName: userName,
+        email: email,
+        phoneNumber: phoneNumber,
+      })
+    );
+    setIsEditing(false);
+  };
+
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
@@ -61,10 +73,7 @@ function UserProfile() {
           />
         </div>
         {isediting ? (
-          <button
-            className="save-data-btn"
-            onClick={dispatch(editUser({ userName, email, phoneNumber }))}
-          >
+          <button className="save-data-btn" onClick={handleSavebtnClick}>
             Save
           </button>
         ) : null}

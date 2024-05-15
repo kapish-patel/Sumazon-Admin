@@ -22,7 +22,7 @@ function Navigation() {
             Products
           </Button>
         </NavLink>
-        <NavLink className={({ isActive, isPending }) => isPending ? "link-container-pending" : isActive ? "link-container-active" : "nav-link-container"} to={'/user'}>
+        <NavLink className={({ isActive, isPending }) => isPending ? "link-container-pending" : isActive ? "link-container-active" : "nav-link-container"} to={'/profile'}>
           <Button variant="outline" startIcon={<PersonOutlineOutlinedIcon/>} style={{ height: '100%', width:'100%' }}>
             User
           </Button>

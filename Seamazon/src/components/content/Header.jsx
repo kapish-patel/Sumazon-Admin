@@ -9,8 +9,6 @@ function Header() {
 
   const handleLogOut = () => {
     dispatch(logOut());
-
-    window.location.href = "/";
   }
 
   return (
