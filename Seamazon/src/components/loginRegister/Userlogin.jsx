@@ -1,7 +1,7 @@
 import { Navigate, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { fetchUser} from "../../Redux/slice/userSlice";
+import { loginUser} from "../../Redux/slice/userSlice";
 import { useState } from "react";
 import "./Userlogin.css";
 
@@ -17,7 +17,7 @@ function UserLogin() {
 
   const handleLogInBtnClick = (e) => {
     e.preventDefault();
-    dispatch(fetchUser({userEmail, userPassword}));
+    dispatch(loginUser({userEmail, userPassword}));
   };
 
   return isLoggedin ? (

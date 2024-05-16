@@ -8,6 +8,18 @@ import "../common/common.css";
 import "./User.css";
 
 function UserProfile() {
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user.userDetails);
+
+  const [isediting, setIsEditing] = useState(false);
+
+  const [userName, setUserName] = useState(user.userName);
+
+  const [email, setEmail] = useState(user.email);
+
+  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
+
   const handleSavebtnClick = () => {
     setIsEditing(false);
     dispatch(
@@ -20,17 +32,6 @@ function UserProfile() {
     setIsEditing(false);
   };
 
-  const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user);
-
-  const [isediting, setIsEditing] = useState(false);
-
-  const [userName, setUserName] = useState(user.userName);
-
-  const [email, setEmail] = useState(user.email);
-
-  const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
 
   return (
     <div className="main-content-container">
