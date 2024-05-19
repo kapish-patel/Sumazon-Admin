@@ -32,6 +32,7 @@ function UserProfile() {
     setIsEditing(false);
   };
 
+  
 
   return (
     <div className="main-content-container">
@@ -74,7 +75,7 @@ function UserProfile() {
           />
         </div>
         {isediting ? (
-          <button className="save-data-btn" onClick={handleSavebtnClick}>
+          <button className="save-button" onClick={handleSavebtnClick}>
             Save
           </button>
         ) : null}

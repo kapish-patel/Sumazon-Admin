@@ -1,7 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// Async functions for fetching  api data
+const getEmptyUserDetails = () => ({
+    userName: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+});
 
+// Async functions for fetching  api data
 export const loginUser = createAsyncThunk(
     'users/loginUser', async ({ userEmail, userPassword }) => {
         const body = {
@@ -48,7 +54,6 @@ export const editUser = createAsyncThunk(
             email: email,
             phone: phoneNumber
         }
-        console.log(body)
         const response = await fetch(`api/users/${email}`,
         {
             method: 'PATCH',
@@ -57,13 +62,14 @@ export const editUser = createAsyncThunk(
             },
             body: JSON.stringify(body)
         });
-        console.log(response.json())
         return response.json()
     }
 )
 
+
 const initialState = {
     userDetails: {
+        user_id: "",
         userName: "",
         email: "",
         password: "",
@@ -88,12 +94,17 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         // Log out
-        logOut: () => {
+        logOut: (state) => {
             // Clear local storage
             localStorage.removeItem('user');
             localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('selectedProduct');
+            localStorage.removeItem('selectedProduct');
+            
             // Reset state to initialState
-            return initialState;
+            state.userDetails = getEmptyUserDetails();
+            state.isLoggedIn = false;
+            state.userStatus = 'idle';
         },
     },
     extraReducers: (builder) => {
@@ -104,11 +115,13 @@ const userSlice = createSlice({
 
             .addCase(loginUser.fulfilled, (state, actions) => {
                 if (actions.payload.validity === true) {
+                    state.userDetails.user_id = actions.payload.user.user_id;
                     state.userDetails.email = actions.payload.user.email;
                     state.userDetails.password = actions.payload.user.password;
                     state.userDetails.phoneNumber = actions.payload.user.phone;
                     state.userDetails.userName = actions.payload.user.name;
                     state.isLoggedIn = true
+                    state.userStatus = 'Succeeded'
 
                     localStorage.setItem('user', JSON.stringify(state.userDetails));
                     localStorage.setItem('isLoggedIn', true);
@@ -132,6 +145,7 @@ const userSlice = createSlice({
                     state.userDetails.phoneNumber = actions.payload.user.phone;
                     state.userDetails.userName = actions.payload.user.name;
                     state.isLoggedIn = true
+                    state.userStatus = 'Successeded'
 
                     localStorage.setItem('user', JSON.stringify(state.userDetails));
                     localStorage.setItem('isLoggedIn', true);
@@ -142,7 +156,6 @@ const userSlice = createSlice({
             .addCase(editUser.rejected, (state) => {
                 state.userStatus = 'Failed';
             })
-
     }
 });
 

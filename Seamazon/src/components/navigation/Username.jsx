@@ -1,15 +1,12 @@
 
-import Avatar from '@mui/material/Avatar';
+import { useSelector } from 'react-redux';
 
 function Username() {
+
+  const userName = useSelector((state) => state.user.userDetails.userName);
   return (
     <div className="username-container">
-        <Avatar
-            alt="Kapish"
-            src="/static/images/avatar/1.jpg"
-            sx={{ width: 56, height: 56, bgcolor: 'blue'}}
-        />
-        <p>Kapish</p>
+        <p>{userName}</p>
     </div>
   )
 }

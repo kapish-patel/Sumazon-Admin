@@ -7,6 +7,7 @@ import UserLogin from "./components/loginRegister/Userlogin";
 import UserRegister from "./components/loginRegister/Userregister";
 import LoginLayout from "./layouts/loginlayout";
 import PrivateRoute from "./PrivateRoute";
+import Product from "./components/products/Product";
 
 // Nested routes for the app
 const AppRouter = createBrowserRouter([
@@ -24,6 +25,10 @@ const AppRouter = createBrowserRouter([
           {
             path: "profile",
             element: <UserProfile />,
+          },
+          {
+            path: "product/:productId",
+            element: <Product/>
           },
           {
             path: "*",
