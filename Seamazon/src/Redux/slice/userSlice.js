@@ -22,7 +22,12 @@ export const loginUser = createAsyncThunk(
                 },
                 body: JSON.stringify(body)
             });
-        return response.json()
+        if (response.status === 200) {
+            return response.json()
+        }
+        else {
+            return {validity: false}
+        }
     }
 )
 
@@ -42,19 +47,21 @@ export const addNewUser = createAsyncThunk(
             body: JSON.stringify(newUser),
         });
 
-        if (!response.ok) throw new Error("Data not saved")
+        return response.json()
     }
 )
 
 
 export const editUser = createAsyncThunk(
-    'users/editUser', async ({userName, email, phoneNumber}) => {
+    'users/editUser', async ({userName, email, phoneNumber, id, originalEmail, password}) => {
         const body = {
             name: userName,
             email: email,
-            phone: phoneNumber
+            phone: phoneNumber,
+            id: id,
+            password: password,
         }
-        const response = await fetch(`api/users/${email}`,
+        const response = await fetch(`api/users/${originalEmail}`,
         {
             method: 'PATCH',
             headers: {
@@ -76,7 +83,11 @@ const initialState = {
         phoneNumber: "",
     },
     isLoggedIn: false,
-    userStatus: 'idle'
+    userStatus: 'idle',
+    isRegistered: false,
+    registrationError: '',
+    loginError: '',
+    updateError: ''
 };
 
 
@@ -126,12 +137,17 @@ const userSlice = createSlice({
                     localStorage.setItem('user', JSON.stringify(state.userDetails));
                     localStorage.setItem('isLoggedIn', true);
                 }
+                else {
+                    state.userStatus = 'Failed';
+                    state.loginError = "Invalid email or password";
+                }
                 state = initialState
             })
 
 
             .addCase(loginUser.rejected, (state) => {
                 state.userStatus = 'Failed';
+                state.loginError = "Invalid email or password";
             })
 
             .addCase(editUser.pending, (state) => {
@@ -150,11 +166,30 @@ const userSlice = createSlice({
                     localStorage.setItem('user', JSON.stringify(state.userDetails));
                     localStorage.setItem('isLoggedIn', true);
                 }
+                else {
+                    state.userStatus = 'Failed';
+                    state.updateError = "Failed to update user a user with similar Email exists";
+                }
                 state = initialState
             })
 
             .addCase(editUser.rejected, (state) => {
                 state.userStatus = 'Failed';
+            })
+
+            .addCase(addNewUser.rejected, (state) => {
+                state.isRegistered = false;
+                state.registrationError = "User already exists";
+            })
+
+            .addCase(addNewUser.fulfilled, (state, actions) => {
+                console.log(actions.payload)
+                if (actions.payload.message === "User created")
+                    state.isRegistered = true;    
+                else {
+                    state.isRegistered = false;
+                    state.registrationError = "User already exists";
+                }
             })
     }
 });

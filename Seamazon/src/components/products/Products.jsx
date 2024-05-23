@@ -2,13 +2,16 @@ import '../common/common.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './Products.css';
+import { useNavigate } from 'react-router-dom';
 import Table from './table';
 
-function handleAddProductclick(){
-  console.log("this is add product button")
-}
-
 function Products() {
+  const navigate = useNavigate();
+
+  const handleAddProductclick = () => {
+    navigate('/newproduct');
+  }
+
   return (
     <div className="main-content-container">
       <div className="product-container">

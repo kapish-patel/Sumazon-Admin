@@ -41,6 +41,20 @@ export const deleteProduct = createAsyncThunk(
 
 );
 
+export const addProduct = createAsyncThunk(
+    'products/addProduct',
+    async (product) => {
+        const response = await fetch('/api/products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(product),
+        });
+        return response.json();
+    }
+);
+
 const initialState = {
     productDetails: [],
     selectedProduct: {},
@@ -81,7 +95,8 @@ const productsSlice = createSlice({
             })
 
             .addCase(updateProduct.fulfilled, (state, action) => {
-                state.selectedProduct = action.payload;
+                console.log('Product updated:', action.payload);
+                state.selectedProduct = action.payload;    
                 state.productStatus = 'Succeeded';
             })
 
@@ -102,8 +117,33 @@ const productsSlice = createSlice({
 
             .addCase(deleteProduct.rejected, (state) => {
                 state.productStatus = 'Failed';
-            });
+            })
 
+            .addCase(addProduct.pending, (state) => {
+                state.productStatus = 'Loading';
+            })
+
+            .addCase(addProduct.fulfilled, (state, action) => {
+                const newProduct = {
+                    id: action.payload.id,
+                    productName: action.payload.name,
+                    description: action.payload.description,
+                    price: action.payload.price,
+                    quantity: action.payload.quantity,
+                    category: action.payload.category,
+                    ratings: action.payload.ratings,
+                    image: action.payload.image,
+                    bestSeller: action.payload.bestSeller, 
+                 };
+                state.productDetails.push(newProduct);
+                // update localStorage
+                localStorage.setItem('productDetails', JSON.stringify(state.productDetails));
+                state.productStatus = 'Succeeded';
+            })
+
+            .addCase(addProduct.rejected, (state) => {
+                state.productStatus = 'Failed';
+            });
     },
 });
 

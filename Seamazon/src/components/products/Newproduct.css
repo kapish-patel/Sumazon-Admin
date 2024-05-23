@@ -1,0 +1,14 @@
+.newproduct-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    background-color: #f5f5f5;
+    gap: 20px;
+}
+
+
+.newproduct-info{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

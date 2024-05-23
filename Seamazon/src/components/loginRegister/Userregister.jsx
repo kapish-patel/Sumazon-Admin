@@ -1,46 +1,64 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNewUser } from "../../Redux/slice/userSlice";
 import { Navigate, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState,} from "react";
+import { useState } from "react";
 import "./Userregister.css";
 
 function UserRegister() {
-
   const dispatch = useDispatch();
   const isLoggedin = useSelector((state) => state.user.isLoggedIn);
-  
+  const isRegistered = useSelector((state) => state.user.isRegistered);
+  const registrationError = useSelector((state) => state.user.registrationError);
+
   // state variables
-  const [email, setUseremail] = useState("");
+  const [email, setUserEmail] = useState("");
   const [name, setUserName] = useState("");
   const [password, setUserPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isRegistered, setIsRegister] = useState(false);
-  
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleRegisterBtnClick = (e) => {
+    // prevent form from submitting
     e.preventDefault();
-    if (password === confirmPassword) {
+
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+    } else {
       dispatch(
         addNewUser({ userEmail: email, userName: name, userPassword: password })
       );
-      setIsRegister(true);
     }
+
+    // clear form fields
+    setUserEmail("");
+    setUserName("");
+    setUserPassword("");
+    setConfirmPassword("");
   };
 
-  return isLoggedin ? <Navigate to="/" /> :
-  isRegistered ? <Navigate to='/login'/> :
-  (
+  if (isLoggedin) {
+    return <Navigate to="/" />;
+  }
+
+  if (isRegistered) {
+    return <Navigate to="/login" />;
+  }
+
+  return (
     <div className="register-container">
       <div className="register-form-container">
         <p>Sign up</p>
         <form className="register-form" method="post">
+          {registrationError && <p className="error-message">{registrationError}</p>}
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
           <input
             type="email"
             id="email"
             name="email"
             placeholder="Email"
+            value={email}
             onChange={(e) => {
-              setUseremail(e.target.value);
+              setUserEmail(e.target.value);
             }}
           />
           <input
@@ -48,6 +66,7 @@ function UserRegister() {
             id="name"
             name="name"
             placeholder="Name"
+            value={name}
             onChange={(e) => {
               setUserName(e.target.value);
             }}
@@ -57,6 +76,7 @@ function UserRegister() {
             id="password"
             name="password"
             placeholder="Password"
+            value={password}
             onChange={(e) => {
               setUserPassword(e.target.value);
             }}
@@ -66,6 +86,7 @@ function UserRegister() {
             id="confirm-password"
             name="confirm-password"
             placeholder="Confirm Password"
+            value={confirmPassword}
             onChange={(e) => {
               setConfirmPassword(e.target.value);
             }}

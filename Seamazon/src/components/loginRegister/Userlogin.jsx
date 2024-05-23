@@ -1,23 +1,26 @@
 import { Navigate, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { loginUser} from "../../Redux/slice/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser } from "../../Redux/slice/userSlice";
 import { useState } from "react";
 import "./Userlogin.css";
 
 function UserLogin() {
   const dispatch = useDispatch();
 
-  // Accessing the authentication state from Redux store
+  // Accessing the authentication state and error message from Redux store
   const isLoggedin = useSelector((state) => state.user.isLoggedIn);
+  const loginError = useSelector((state) => state.user.loginError);
 
-  // State to store the user input
-  const [userEmail, setUseremail] = useState();
-  const [userPassword, setUserPassword] = useState();
+  // State to store the user input and error message
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
 
   const handleLogInBtnClick = (e) => {
     e.preventDefault();
-    dispatch(loginUser({userEmail, userPassword}));
+    dispatch(loginUser({ userEmail, userPassword }));
+    //clear form fields
+    setUserEmail("");
+    setUserPassword("");
   };
 
   return isLoggedin ? (
@@ -27,14 +30,16 @@ function UserLogin() {
       <div className="login-form">
         <p>Sign In</p>
         <form method="post">
+          {loginError && <p className="error-message">{loginError}</p>}
           <div className="form-group">
             <input
               type="email"
               id="email"
               name="email"
               placeholder="Email"
+              value={userEmail}
               onChange={(e) => {
-                setUseremail(e.target.value);
+                setUserEmail(e.target.value);
               }}
             />
           </div>
@@ -44,6 +49,7 @@ function UserLogin() {
               id="password"
               name="password"
               placeholder="Password"
+              value={userPassword}
               onChange={(e) => {
                 setUserPassword(e.target.value);
               }}
