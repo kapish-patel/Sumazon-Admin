@@ -161,7 +161,7 @@ function Newproduct() {
                             </div>
                         )}
                     </div>
-                    <div className="info-section newproduct-info">
+                    <div className="info-section newproduct-info saveBtn">
                         <button onClick={handleSavebtnClick}>Save</button>
                         <button onClick={handleResetbtnClick}>Reset</button>
                     </div>

@@ -39,7 +39,7 @@ function UserProfile() {
 
   return (
     <div className="main-content-container">
-      <div className="user-header">
+      <div className="user-header saveBtn">
         <button onClick={() => setIsEditing(!isEditing)}>
           <FontAwesomeIcon icon={faPenToSquare} /> Edit
         </button>

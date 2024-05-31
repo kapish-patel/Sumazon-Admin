@@ -168,7 +168,7 @@ function Product() {
                             </div>
                         </div>
                         {isEditing && (
-                            <div className="info-section">
+                            <div className="info-section saveBtn">
                                 <label>Change Product Image:</label>
                                 <input type="file" onChange={handleImageChange} />
                                 <button className="save-button" onClick={handleSaveBtn}>Save</button>
